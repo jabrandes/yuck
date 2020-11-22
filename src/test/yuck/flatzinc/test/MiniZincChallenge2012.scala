@@ -134,7 +134,7 @@ final class MiniZincChallenge2012 extends MiniZincBasedTest {
     @Test
     @Category(Array(classOf[MinimizationProblem]))
     def vrp_A_n38_k5: Unit = {
-        solve(task.copy(problemName = "vrp", instanceName = "A-n38-k5.vrp", maybeHighScore = Some(737)))
+        solve(task.copy(problemName = "cvrp", modelName = "cvrp_mip", instanceName = "AugeratEtAl-1995/A/A-n38-k5", maybeHighScore = Some(737)))
     }
 
 }

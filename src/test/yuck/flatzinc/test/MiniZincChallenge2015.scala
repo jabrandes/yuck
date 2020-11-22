@@ -30,7 +30,7 @@ final class MiniZincChallenge2015 extends MiniZincBasedTest {
     @Test
     @Category(Array(classOf[MinimizationProblem], classOf[HasCircuitConstraint]))
     def cvrp_simple2: Unit = {
-        solve(task.copy(problemName = "cvrp", instanceName = "simple2", maybeOptimum = Some(34)))
+        solve(task.copy(problemName = "cvrp", modelName = "cvrp_cp", instanceName = "simple2", maybeOptimum = Some(34)))
     }
 
     @Test
