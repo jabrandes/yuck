@@ -40,6 +40,10 @@ object FlatZincParser extends RegexParsers {
                     FloatConst(s.toDouble)
             },
             s => String.format("Invalid float literal %s", s))
+    lazy val string_const: Parser[StringConst] = 
+        "\"" ~> regex(new Regex("[^(?:(?<!\\\\)\")]*")) <~ "\"" ^^ {
+            value => StringConst(value)
+        }
     lazy val int_range: Parser[IntRange] =
         int_const ~ ".." ~ int_const ^^ {
             case IntConst(lb) ~ _ ~ IntConst(ub) => IntRange(lb, ub)
@@ -65,7 +69,7 @@ object FlatZincParser extends RegexParsers {
             case id ~ idx => ArrayAccess(id, idx)
         }
     lazy val term: Parser[Term] =
-        identifier ~ (("(" ~> rep1sep(expr, ",") <~ ")")?) ^^ {
+        identifier ~ (("(" ~> rep1sep(expr | string_const, ",") <~ ")")?) ^^ {
             case id ~ optionalParams => new Term(id, optionalParams.getOrElse(Nil))
         }
     lazy val expr: Parser[Expr] =

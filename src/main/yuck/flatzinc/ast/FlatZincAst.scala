@@ -32,6 +32,9 @@ final case class IntConst(val value: Int) extends ConstExpr {
 final case class FloatConst(val value: Double) extends ConstExpr {
     override def toString = value.toString
 }
+final case class StringConst(val value: String) extends ConstExpr {
+    override def toString = value
+}
 final case class IntSetConst(value: ValueSet[Int]) extends ConstExpr
 final case class ArrayConst(val value: List[Expr]) extends ConstExpr {
     override def toString = "[%s]".format(value.iterator.map(_.toString).mkString(", "))
